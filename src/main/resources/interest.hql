@@ -1,0 +1,6 @@
+CREATE TABLE interest (
+	profileId STRING,
+  interestId INT,
+	title STRING
+)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','

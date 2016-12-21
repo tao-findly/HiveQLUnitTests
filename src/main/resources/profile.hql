@@ -1,0 +1,8 @@
+CREATE TABLE profile (
+  id STRING,
+  type STRING,
+  created TIMESTAMP,
+  score INT,
+  active BOOLEAN
+)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
