@@ -2,7 +2,7 @@ Last login: Tue Dec 20 10:40:29 on ttys004
 Findly-One:HiveQLUnitTests taol$ mvn test
 [INFO] Scanning for projects...
 [WARNING]
-[WARNING] Some problems were encountered while building the effective model for SymthonyTalent:HiveQLUnitTests:jar:1.0-SNAPSHOT
+[WARNING] Some problems were encountered while building the effective model for SymthonyTalent:HiveQLUnitTests:jars:1.0-SNAPSHOT
 [WARNING] 'build.plugins.plugin.(groupId:artifactId)' must be unique but found duplicate declaration of plugin org.apache.maven.plugins:maven-surefire-plugin @ line 31, column 21
 [WARNING]
 [WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
