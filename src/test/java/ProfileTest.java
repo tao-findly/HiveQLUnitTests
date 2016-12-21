@@ -48,4 +48,28 @@ public class ProfileTest {
         Row[] results = sqlContext.sql("SELECT * FROM profile WHERE id = 'fb878fe5-d0d4-4e74-9da6-4bd541aba732'").collect();
         assertEquals(1, results.length);
     }
+
+    @Test
+    public void testCountInterest() throws Exception {
+        HiveContext sqlContext = hiveServer.getHiveContext();
+        loader.loadDataIntoTable("interest", new LocalFileResource("src/test/resources/interest.txt"), "");
+
+        Row[] results = sqlContext.sql("SELECT title, COUNT(*) FROM interest GROUP BY title").collect();
+        assertEquals(4, results.length);
+        assertEquals("Health", results[0].getString(0));
+        assertEquals(2, results[0].getLong(1));
+    }
+
+    @Test
+    public void testJoin() throws Exception {
+        HiveContext sqlContext = hiveServer.getHiveContext();
+        loader.loadDataIntoTable("profile", new LocalFileResource("src/test/resources/profile.txt"), "");
+        loader.loadDataIntoTable("interest", new LocalFileResource("src/test/resources/interest.txt"), "");
+        MultiExpressionScript script = new MultiExpressionScript(
+                new ResourceFolderResource("/insert_profile_interest.sql")
+        );
+        script.runScript(sqlContext);
+        Row[] results = sqlContext.sql("SELECT id, interestTitle FROM profile_interest WHERE id = 'fb87946e-40d2-401b-8221-b82ad1273df5'").collect();
+        assertEquals(3, results.length);
+    }
 }

@@ -1,11 +1,3 @@
-CREATE TABLE profile_interest (
-	id STRING,
-  type STRING,
-  created TIMESTAMP,
-  active BOOLEAN,
-	interestTitle STRING
-)
-
 INSERT OVERWRITE TABLE profile_interest
 SELECT
   p.id,
@@ -13,5 +5,5 @@ SELECT
   p.created,
   p.active,
   i.title
-FROM profile
+FROM profile p
 INNER JOIN interest i ON i.profileId = p.id;
