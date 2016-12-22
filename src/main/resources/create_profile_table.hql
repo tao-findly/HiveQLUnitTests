@@ -1,4 +1,4 @@
-CREATE EXTERNAL TABLE profile (
+CREATE EXTERNAL TABLE IF NOT EXISTS profile (
     id STRING,
     type STRING,
     created TIMESTAMP,
