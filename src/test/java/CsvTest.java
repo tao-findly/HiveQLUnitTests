@@ -30,7 +30,7 @@ public class CsvTest {
                     new MultiExpressionScript(
                             new VariableConfigResource(
                                     new ResourceFolderResource("/create_event_table.hql")
-                            ).addConfig("resources", "src/test/resources")
+                            ).addConfig("resources", new File("src/test/resources").getAbsolutePath())
                     )
             );
 

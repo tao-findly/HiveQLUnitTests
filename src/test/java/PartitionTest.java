@@ -8,6 +8,7 @@ import org.finra.hiveqlunit.script.MultiExpressionScript;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
+import java.io.File;
 
 import static org.junit.Assert.assertEquals;
 
@@ -20,16 +21,13 @@ public class PartitionTest {
     public static TestHiveServer hiveServer = new TestHiveServer();
 
     @Rule
-    public static TestDataLoader loader = new TestDataLoader(hiveServer);
-
-    @Rule
     public static SetUpHql prepSrc =
             new SetUpHql(
                     hiveServer,
                     new MultiExpressionScript(
                             new VariableConfigResource(
                                     new ResourceFolderResource("/create_events_table_by_partition.hql")
-                            ).addConfig("resources", "src/test/resources")
+                            ).addConfig("resources", new File("src/test/resources").getAbsolutePath())
                     )
             );
 
