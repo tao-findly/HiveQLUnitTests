@@ -1,4 +1,4 @@
-ADD JAR /Users/taol/git/HiveQLUnitTests/src/test/resources/jars/json-serde.jar;
+ADD JAR ${resources}/jars/json-serde.jar;
 
 SET mapred.output.compress=true;
 SET hive.exec.compress.output=true;
@@ -20,4 +20,4 @@ CREATE EXTERNAL TABLE IF NOT EXISTS event (
    event STRING)
 ROW FORMAT SERDE 'org.openx.data.jsonserde.JsonSerDe'
 STORED AS TEXTFILE
-LOCATION '/Users/taol/git/HiveQLUnitTests/src/test/resources/event';
+LOCATION '${resources}/event';

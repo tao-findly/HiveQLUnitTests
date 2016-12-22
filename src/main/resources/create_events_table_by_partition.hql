@@ -1,4 +1,4 @@
-ADD JAR /Users/taol/git/HiveQLUnitTests/src/test/resources/jars/json-serde.jar;
+ADD JAR ${resources}/jars/json-serde.jar;
 
 CREATE EXTERNAL TABLE IF NOT EXISTS events (
   sgAccountName STRING,
@@ -14,6 +14,6 @@ CREATE EXTERNAL TABLE IF NOT EXISTS events (
 PARTITIONED BY (date STRING)
 ROW FORMAT SERDE 'org.openx.data.jsonserde.JsonSerDe'
 STORED AS TEXTFILE
-LOCATION '/Users/taol/git/HiveQLUnitTests/src/test/resources/events/';
+LOCATION '${resources}/events/';
 
 MSCK REPAIR TABLE events;

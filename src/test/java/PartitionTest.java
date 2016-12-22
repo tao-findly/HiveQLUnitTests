@@ -12,6 +12,10 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class PartitionTest {
+
+    private static ResourceFolderResource baseResource =
+            new ResourceFolderResource("/create_events_table_by_partition.hql");
+
     @ClassRule
     public static TestHiveServer hiveServer = new TestHiveServer();
 
@@ -23,17 +27,28 @@ public class PartitionTest {
             new SetUpHql(
                     hiveServer,
                     new MultiExpressionScript(
-                            new ResourceFolderResource("/create_events_table_by_partition.hql")
+                            new VariableConfigResource(
+                                    new ResourceFolderResource("/create_events_table_by_partition.hql")
+                            ).addConfig("resources", "src/test/resources")
                     )
             );
 
     @Test
     public void testPartitionValidRange() {
         HiveContext sqlContext = hiveServer.getHiveContext();
-        Row[] results = sqlContext.sql("SELECT * FROM events").collect();
+        Row[] results = sqlContext.sql("SELECT * FROM events WHERE date >= '2016-12-20' AND date <= '2016-12-21'").collect();
         assertEquals(2, results.length);
         assertEquals("UAT-ORG161", results[0].getString(0));
         assertEquals(161, results[0].getInt(1));
         assertEquals("dropped", results[0].getString(6));
+    }
+
+    @Test
+    public void testPartitionInvalidRange() {
+        HiveContext sqlContext = hiveServer.getHiveContext();
+
+        Row[] results = sqlContext.sql(
+                "SELECT * FROM events WHERE date >= '2016-10-10' AND date <= '2016-11-13'").collect();
+        assertEquals(0, results.length);
     }
 }

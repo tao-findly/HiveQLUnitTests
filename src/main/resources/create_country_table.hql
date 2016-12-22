@@ -4,4 +4,4 @@ CREATE EXTERNAL TABLE IF NOT EXISTS country (
 )
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
-LOCATION '/Users/taol/git/HiveQLUnitTests/src/test/resources/country';
+LOCATION '${resources}/country';

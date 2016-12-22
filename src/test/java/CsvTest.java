@@ -28,17 +28,19 @@ public class CsvTest {
             new SetUpHql(
                     hiveServer,
                     new MultiExpressionScript(
-                            new ResourceFolderResource("/create_event_table.hql")
+                            new VariableConfigResource(
+                                    new ResourceFolderResource("/create_event_table.hql")
+                            ).addConfig("resources", "src/test/resources")
                     )
             );
 
 
-    @Test
-    public void testSelectCountry() throws Exception {
+//    @Test
+//    public void testSelectCountry() throws Exception {
 //        HiveContext sqlContext = hiveServer.getHiveContext();
 //        Row[] results = sqlContext.sql("SELECT * FROM country").collect();
 //        assertEquals(251, results.length);
-    }
+//    }
 
     @Test
     public void testSelectEvent() throws Exception {
